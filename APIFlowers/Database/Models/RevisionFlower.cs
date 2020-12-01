@@ -18,7 +18,7 @@ namespace APIFlowers.Database.Models
         public int Amount { get; set; }
 
         public string Comment { get; set; }
-        //TODO add flower
+  
 
     }
 }

@@ -14,6 +14,7 @@ namespace APIFlowers.Database.Models
         public Order()
         {
             OrderServices = new HashSet<OrderService>();
+            OrderFlowers = new HashSet<OrderFlower>();
         }
         [Key]
         public int Id { get; set; }
@@ -28,17 +29,19 @@ namespace APIFlowers.Database.Models
 
         [ForeignKey("Status"), Required]
         public int StatusId { get; set; }
-        
+
         public decimal BasicPrice { get; set; }
 
 
         public decimal TotalPrice { get; set; }
-        
+
         //TODO need test [DataType(DataType.ImageUrl)]
-        //TODO need test required and other params
-        public string PhotoPath { get; set; } 
+
+        public string PhotoPath { get; set; }
 
         [JsonIgnore]
         public virtual ICollection<OrderService> OrderServices { get; set; }
+        [JsonIgnore]
+        public virtual ICollection<OrderFlower> OrderFlowers { get; set; }
     }
 }
