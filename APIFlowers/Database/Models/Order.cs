@@ -4,12 +4,17 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
+using Newtonsoft.Json;
 
 namespace APIFlowers.Database.Models
 {
     [Table("Order")]
     public class Order
     {
+        public Order()
+        {
+            OrderServices = new HashSet<OrderService>();
+        }
         [Key]
         public int Id { get; set; }
         [DataType(DataType.Date), Required]
@@ -33,6 +38,7 @@ namespace APIFlowers.Database.Models
         //TODO need test required and other params
         public string PhotoPath { get; set; } 
 
-
+        [JsonIgnore]
+        public virtual ICollection<OrderService> OrderServices { get; set; }
     }
 }
