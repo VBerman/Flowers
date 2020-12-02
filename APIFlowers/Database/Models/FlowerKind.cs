@@ -10,7 +10,7 @@ namespace APIFlowers.Database.Models
     [Table("FlowerKind")]
     public class FlowerKind
     {
-        [Key, Required]
+        [Key]
         public int Id { get; set; }
         [Required]
         public string Name { get; set; }

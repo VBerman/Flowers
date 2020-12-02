@@ -7,18 +7,19 @@ using System.Threading.Tasks;
 
 namespace APIFlowers.Database.Models
 {
-    [Table("Cell")]
+    [Table("Client")]
     public class Client
     {
-        [Key, Phone, Required]
-        public int Phone { get; set; }
+        [Key, DatabaseGenerated(DatabaseGeneratedOption.None), Phone]
+        public ulong Phone { get; set; }
 
         [MaxLength(150), MinLength(3), Required]
         public string FullName { get; set; }
         
         public bool Permanent { get; set; }
+        [Required]
+        public string HashPassword { get; set; }
 
 
-        
     }
 }

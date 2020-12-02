@@ -9,8 +9,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace APIFlowers.Migrations
 {
     [DbContext(typeof(EFContext))]
-    [Migration("20201201213711_Mb_End")]
-    partial class Mb_End
+    [Migration("20201202221141_Initial")]
+    partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -58,21 +58,24 @@ namespace APIFlowers.Migrations
 
             modelBuilder.Entity("APIFlowers.Database.Models.Client", b =>
                 {
-                    b.Property<int>("Phone")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
+                    b.Property<ulong>("Phone")
+                        .HasColumnType("bigint unsigned");
 
                     b.Property<string>("FullName")
                         .IsRequired()
                         .HasColumnType("varchar(150) CHARACTER SET utf8mb4")
                         .HasMaxLength(150);
 
+                    b.Property<string>("HashPassword")
+                        .IsRequired()
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+
                     b.Property<bool>("Permanent")
                         .HasColumnType("tinyint(1)");
 
                     b.HasKey("Phone");
 
-                    b.ToTable("Cell");
+                    b.ToTable("Client");
                 });
 
             modelBuilder.Entity("APIFlowers.Database.Models.Color", b =>
