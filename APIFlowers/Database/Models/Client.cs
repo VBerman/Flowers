@@ -20,6 +20,7 @@ namespace APIFlowers.Database.Models
         [Required]
         public string HashPassword { get; set; }
 
+        public virtual ICollection<Order> OrderClient { get; set; }
 
     }
 }

@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 namespace APIFlowers.Controllers
 {
     [ApiController]
-    [Route("api/[controller]")]
+    [Route("Flowers/[controller]")]
     public class AuthController : ControllerBase
     {
         private readonly Database.EFContext context;
@@ -43,7 +43,7 @@ namespace APIFlowers.Controllers
             return BadRequest(ModelState);
         }
 
-
+        
     }
     public class AuthModel
     {

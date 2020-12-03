@@ -1,4 +1,4 @@
-﻿using Newtonsoft.Json;
+﻿using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -8,21 +8,19 @@ using System.Threading.Tasks;
 
 namespace APIFlowers.Database.Models
 {
-    [Table("Bouquet")]
-    public class Bouquet
+    [Table("Aroma")]
+    public class Aroma
     {
-        public Bouquet()
+        public Aroma()
         {
-            BouquetFlowers = new HashSet<BouquetFlower>();
+            FlowerAroma = new HashSet<Flower>();
         }
         [Key, Required]
         public int Id { get; set; }
+
         [Required]
         public string Name { get; set; }
-        public string Description { get; set; }
-        public string PhotoPath { get; set; }
-        
-        [JsonIgnore]
-        public virtual ICollection<BouquetFlower> BouquetFlowers { get; set; }
+        public virtual ICollection<Flower> FlowerAroma { get; set; }
     }
 }
+

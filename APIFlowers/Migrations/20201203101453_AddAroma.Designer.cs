@@ -3,14 +3,16 @@ using System;
 using APIFlowers.Database;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace APIFlowers.Migrations
 {
     [DbContext(typeof(EFContext))]
-    partial class EFContextModelSnapshot : ModelSnapshot
+    [Migration("20201203101453_AddAroma")]
+    partial class AddAroma
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -65,8 +67,6 @@ namespace APIFlowers.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("BouquetId", "FlowerId");
-
-                    b.HasIndex("FlowerId");
 
                     b.ToTable("BouquetFlower");
                 });
@@ -136,18 +136,10 @@ namespace APIFlowers.Migrations
                     b.Property<string>("PhotoPath")
                         .HasColumnType("longtext CHARACTER SET utf8mb4");
 
-                    b.Property<int?>("WinterHardinessId")
+                    b.Property<int>("WinterHardinessId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("AromaId");
-
-                    b.HasIndex("ColorId");
-
-                    b.HasIndex("FlowerKindId");
-
-                    b.HasIndex("WinterHardinessId");
 
                     b.ToTable("Flower");
                 });
@@ -184,8 +176,6 @@ namespace APIFlowers.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("FlowerAreaId", "Row", "Column");
-
-                    b.HasIndex("FlowerId");
 
                     b.ToTable("FlowerAreaFlower");
                 });
@@ -236,9 +226,6 @@ namespace APIFlowers.Migrations
                     b.Property<int>("ClientId")
                         .HasColumnType("int");
 
-                    b.Property<ulong?>("ClientPhone")
-                        .HasColumnType("bigint unsigned");
-
                     b.Property<DateTime>("Date")
                         .HasColumnType("datetime(6)");
 
@@ -248,9 +235,6 @@ namespace APIFlowers.Migrations
                     b.Property<string>("PhotoPath")
                         .HasColumnType("longtext CHARACTER SET utf8mb4");
 
-                    b.Property<int?>("ServiceId")
-                        .HasColumnType("int");
-
                     b.Property<int>("StatusId")
                         .HasColumnType("int");
 
@@ -258,12 +242,6 @@ namespace APIFlowers.Migrations
                         .HasColumnType("decimal(65,30)");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("ClientPhone");
-
-                    b.HasIndex("ServiceId");
-
-                    b.HasIndex("StatusId");
 
                     b.ToTable("Order");
                 });
@@ -321,10 +299,8 @@ namespace APIFlowers.Migrations
 
             modelBuilder.Entity("APIFlowers.Database.Models.RevisionFlower", b =>
                 {
-                    b.Property<int>("FlowerId")
-                        .HasColumnType("int");
-
                     b.Property<int>("RevisionId")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
                     b.Property<int>("Amount")
@@ -333,9 +309,7 @@ namespace APIFlowers.Migrations
                     b.Property<string>("Comment")
                         .HasColumnType("longtext CHARACTER SET utf8mb4");
 
-                    b.HasKey("FlowerId", "RevisionId");
-
-                    b.HasIndex("RevisionId");
+                    b.HasKey("RevisionId");
 
                     b.ToTable("RevisionFlower");
                 });
@@ -396,78 +370,6 @@ namespace APIFlowers.Migrations
                         .HasForeignKey("BouquetId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.HasOne("APIFlowers.Database.Models.Flower", null)
-                        .WithMany("BouquetFlowers")
-                        .HasForeignKey("FlowerId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("APIFlowers.Database.Models.Flower", b =>
-                {
-                    b.HasOne("APIFlowers.Database.Models.Aroma", null)
-                        .WithMany("FlowerAroma")
-                        .HasForeignKey("AromaId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("APIFlowers.Database.Models.Color", null)
-                        .WithMany("FlowerColor")
-                        .HasForeignKey("ColorId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("APIFlowers.Database.Models.FlowerKind", null)
-                        .WithMany("FlowerKinds")
-                        .HasForeignKey("FlowerKindId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("APIFlowers.Database.Models.WinterHardiness", null)
-                        .WithMany("FlowerWinterHardiness")
-                        .HasForeignKey("WinterHardinessId");
-                });
-
-            modelBuilder.Entity("APIFlowers.Database.Models.FlowerAreaFlower", b =>
-                {
-                    b.HasOne("APIFlowers.Database.Models.FlowerArea", null)
-                        .WithMany("FlowerAreaFlowers")
-                        .HasForeignKey("FlowerAreaId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("APIFlowers.Database.Models.Flower", null)
-                        .WithMany("FlowerAreaFlowers")
-                        .HasForeignKey("FlowerId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("APIFlowers.Database.Models.FlowerBalance", b =>
-                {
-                    b.HasOne("APIFlowers.Database.Models.Flower", null)
-                        .WithMany("FlowerBalances")
-                        .HasForeignKey("FlowerId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("APIFlowers.Database.Models.Order", b =>
-                {
-                    b.HasOne("APIFlowers.Database.Models.Client", null)
-                        .WithMany("OrderClient")
-                        .HasForeignKey("ClientPhone");
-
-                    b.HasOne("APIFlowers.Database.Models.Service", null)
-                        .WithMany("OrderService")
-                        .HasForeignKey("ServiceId");
-
-                    b.HasOne("APIFlowers.Database.Models.Status", null)
-                        .WithMany("OrderStatus")
-                        .HasForeignKey("StatusId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
                 });
 
             modelBuilder.Entity("APIFlowers.Database.Models.OrderFlower", b =>
@@ -484,21 +386,6 @@ namespace APIFlowers.Migrations
                     b.HasOne("APIFlowers.Database.Models.Order", null)
                         .WithMany("OrderServices")
                         .HasForeignKey("OrderId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("APIFlowers.Database.Models.RevisionFlower", b =>
-                {
-                    b.HasOne("APIFlowers.Database.Models.Flower", null)
-                        .WithMany("RevisionFlowers")
-                        .HasForeignKey("FlowerId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("APIFlowers.Database.Models.Revision", null)
-                        .WithMany("RevisionFlowers")
-                        .HasForeignKey("RevisionId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });

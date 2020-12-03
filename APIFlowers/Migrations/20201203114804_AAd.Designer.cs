@@ -3,14 +3,16 @@ using System;
 using APIFlowers.Database;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace APIFlowers.Migrations
 {
     [DbContext(typeof(EFContext))]
-    partial class EFContextModelSnapshot : ModelSnapshot
+    [Migration("20201203114804_AAd")]
+    partial class AAd
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -321,10 +323,8 @@ namespace APIFlowers.Migrations
 
             modelBuilder.Entity("APIFlowers.Database.Models.RevisionFlower", b =>
                 {
-                    b.Property<int>("FlowerId")
-                        .HasColumnType("int");
-
                     b.Property<int>("RevisionId")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
                     b.Property<int>("Amount")
@@ -333,9 +333,17 @@ namespace APIFlowers.Migrations
                     b.Property<string>("Comment")
                         .HasColumnType("longtext CHARACTER SET utf8mb4");
 
-                    b.HasKey("FlowerId", "RevisionId");
+                    b.Property<int?>("FlowerId")
+                        .HasColumnType("int");
 
-                    b.HasIndex("RevisionId");
+                    b.Property<int>("RevisionId1")
+                        .HasColumnType("int");
+
+                    b.HasKey("RevisionId");
+
+                    b.HasIndex("FlowerId");
+
+                    b.HasIndex("RevisionId1");
 
                     b.ToTable("RevisionFlower");
                 });
@@ -492,13 +500,11 @@ namespace APIFlowers.Migrations
                 {
                     b.HasOne("APIFlowers.Database.Models.Flower", null)
                         .WithMany("RevisionFlowers")
-                        .HasForeignKey("FlowerId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("FlowerId");
 
                     b.HasOne("APIFlowers.Database.Models.Revision", null)
                         .WithMany("RevisionFlowers")
-                        .HasForeignKey("RevisionId")
+                        .HasForeignKey("RevisionId1")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });

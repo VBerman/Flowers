@@ -16,5 +16,7 @@ namespace APIFlowers.Database.Models
         public DateTime Date {get; set;}
 
         public int Amount { get; set; }
+   
+
     }
 }

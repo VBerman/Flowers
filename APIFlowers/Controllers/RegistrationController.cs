@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace APIFlowers.Controllers
 {
-    [ApiController, Route("api/[controller]")]
+    [ApiController, Route("Flowers/[controller]")]
     public class RegistrationController : ControllerBase
     {
         private readonly Database.EFContext context;
@@ -52,6 +52,8 @@ namespace APIFlowers.Controllers
     public class RegistrationModel
     {
         [Required, Phone]
+        //TODO if im will have time, change phone to int
+
         public string Phone { get; set; }
         [Required, MinLength(4), MaxLength(32)]
         public string Password { get; set; }

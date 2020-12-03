@@ -5,6 +5,21 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Migrations\20201203105807_Steps.cs" />
+    <Compile Remove="Migrations\20201203105807_Steps.Designer.cs" />
+    <Compile Remove="Migrations\20201203111118_Steps2.cs" />
+    <Compile Remove="Migrations\20201203111118_Steps2.Designer.cs" />
+    <Compile Remove="Migrations\20201203113258_Steps3.cs" />
+    <Compile Remove="Migrations\20201203113258_Steps3.Designer.cs" />
+    <Compile Remove="Migrations\20201203113934_asdasdadssax.cs" />
+    <Compile Remove="Migrations\20201203113934_asdasdadssax.Designer.cs" />
+    <Compile Remove="Migrations\20201203114137_asdasdadssaxСФЫ.cs" />
+    <Compile Remove="Migrations\20201203114137_asdasdadssaxСФЫ.Designer.cs" />
+    <Compile Remove="Migrations\20201203114256_asdasdadssaxСФЫsd.cs" />
+    <Compile Remove="Migrations\20201203114256_asdasdadssaxСФЫsd.Designer.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="3.1.10">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>

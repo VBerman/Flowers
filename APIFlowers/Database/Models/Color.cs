@@ -10,10 +10,18 @@ namespace APIFlowers.Database.Models
     [Table("Color")]
     public class Color
     {
+
+        public Color()
+        {
+            FlowerColor = new HashSet<Flower>();
+        }
+
         [Key, Required]
         public int Id { get; set; }
 
         [Required]
         public string Name { get; set; }
+        public virtual ICollection<Flower> FlowerColor { get; set; }
+
     }
 }

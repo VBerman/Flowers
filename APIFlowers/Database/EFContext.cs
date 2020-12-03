@@ -22,6 +22,7 @@ namespace APIFlowers.Database
         public DbSet<FlowerArea> FlowerAreas { get; set; }
         public DbSet<FlowerAreaFlower> FlowerAreaFlowers { get; set; }
         public DbSet<OrderFlower> OrderFlowers { get; set; }
+        public DbSet<Aroma> Aromas { get; set; }
         
         public EFContext(DbContextOptions options) : base(options)
         {
@@ -35,6 +36,7 @@ namespace APIFlowers.Database
             modelBuilder.Entity<OrderFlower>().HasKey(c => new { c.FlowerId, c.OrderId});
             modelBuilder.Entity<BouquetFlower>().HasKey(c => new { c.BouquetId, c.FlowerId});
             modelBuilder.Entity<FlowerAreaFlower>().HasKey(c => new { c.FlowerAreaId, c.Row, c.Column});
+            modelBuilder.Entity<RevisionFlower>().HasKey(c => new { c.FlowerId, c.RevisionId});
         }
     }
 

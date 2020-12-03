@@ -11,14 +11,16 @@ namespace APIFlowers.Database.Models
     public class RevisionFlower
     {
         
-        [Key, Required]
+        [Key, ForeignKey("Revision")]
         public int RevisionId { get; set; }
+        [Key,  ForeignKey("Flower")]
+        public int FlowerId { get; set; }
         
         [Required]
         public int Amount { get; set; }
 
         public string Comment { get; set; }
-  
+        
 
     }
 }
